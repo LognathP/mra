@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar target/MRA.war -Dserver.port=$PORT
+web: java $JAVA_OPTS -jar target/MRA.jar -Dserver.port=$PORT

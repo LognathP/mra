@@ -13,6 +13,7 @@
 	<artifactId>MRA</artifactId>
 	<version>1.0</version>
 	<name>MRA</name>
+	<packaging>jar</packaging>
 	<description>Mra project for Spring Boot</description>
 
 	<properties>
