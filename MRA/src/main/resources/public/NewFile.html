@@ -1,0 +1,354 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<style>
+.myChart {
+	position: absolute;
+	display: block;
+	width: 100% !important;
+	height: 50% !important;
+	z-index: 1 !important;
+	margin-top: 28.2% !important;
+	margin-left: -3% !important;
+}
+
+video {
+	display: block;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: auto;
+}
+
+.tab {
+	background-color: #52ab66;
+	color: white;
+	border-right: solid 0.3px;
+	border-color: white;
+	padding-left: 20px;
+	text-align: center;
+}
+
+.product-slider {
+	padding: 45px;
+	width: 600px !important;
+	margin: 0 auto;
+}
+
+.product-slider #carousel {
+	margin: 0;
+	width: 600px;
+}
+
+.product-slider #thumbcarousel {
+	margin: 12px 0 0;
+	padding: 0 45px;
+	width: 600px;
+}
+
+.product-slider #thumbcarousel .item {
+	text-align: center;
+}
+
+.product-slider #thumbcarousel .item .thumb {
+	width: 27%;
+	margin: 0 2%;
+	display: inline-block;
+	vertical-align: middle;
+	cursor: pointer;
+	max-width: 140px;
+}
+
+.product-slider .item img {
+	width: 100%;
+	height: auto;
+}
+
+.carousel-control {
+	color: #4e34de;
+	text-align: center;
+	text-shadow: none !important;
+	opacity: 1 !important;
+	font-size: 30px;
+	width: 5% !important;
+	height: 30px;
+	line-height: 20px;
+	top: 23%;
+}
+
+.carousel-control.left {
+	background-image: none !important;
+	background-repeat: none;
+}
+
+.carousel-control.right {
+	background-image: none !important;
+	background-repeat: none;
+}
+
+.carousel-caption, .carousel-control .fa {
+	font: normal normal normal 30px/26px FontAwesome;
+}
+
+.carousel-control {
+	background-color: none !important;
+	bottom: auto;
+	font-size: 20px;
+	left: 0;
+	position: absolute;
+	top: 35% !important;
+	width: auto;
+}
+
+.fa-angle-left {
+	color: black;
+}
+
+.fa-angle-right {
+	color: black;
+}
+</style>
+<script
+	src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
+<!-- CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+	crossorigin="anonymous">
+<!-- jQuery and JS bundle w/ Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+
+	<div class="product-slider">
+		<div id="carousel" class="carousel slide" data-interval="false"
+			data-ride="carousel">
+			<div class="carousel-inner">
+				<div class="item active">
+					<div class="row">
+						<div class="col-sm-12">
+							<canvas class="myChart" style="position: absolute;" id="c1"></canvas>
+							<video controls="" style="position: relative;">
+								<source
+									src="https://demo2.rambee.website/assets/spend-insights/flower.webm"
+									type="video/mp4">
+							</video>
+
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4 tab">
+							<span style="font-size: 11px;"> Average View Duration</span>
+							<div class="row justify-content-center text-center">
+								<div class="col-sm-4">
+									<span style="font-size: 30px;">0:45</span>
+								</div>
+								<div class="col-sm-3">
+									<table>
+										<tr>
+											<td>101%</td>
+										</tr>
+										<tr>
+											<td>0.23</td>
+										</tr>
+									</table>
+								</div>
+								<div class="col-sm-3">
+									<span style="font-size: 30px;"> <i
+										class="fa fa-arrow-down" aria-hidden="true"></i></span>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-sm-4 tab">
+							<span style="font-size: 11px;"> Completion Rate</span>
+							<div class="row">
+								<div class="col-sm-4">
+									<span style="font-size: 30px;">0:35</span>
+								</div>
+								<div class="col-sm-3">
+									<table>
+										<tr>
+											<td>19%</td>
+										</tr>
+										<tr>
+											<td>0.53</td>
+										</tr>
+									</table>
+								</div>
+								<div class="col-sm-3">
+									<span style="font-size: 30px;"> <i
+										class="fa fa-arrow-up" aria-hidden="true"></i></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4 tab">
+							<span style="font-size: 11px;"> Cost Per View</span>
+							<div class="row">
+								<div class="col-sm-4">
+									<span style="font-size: 30px;">0:76</span>
+								</div>
+								<div class="col-sm-3">
+									<table>
+										<tr>
+											<td>121%</td>
+										</tr>
+										<tr>
+											<td>0.67</td>
+										</tr>
+									</table>
+								</div>
+								<div class="col-sm-3">
+									<span style="font-size: 30px;"> <i
+										class="fa fa-arrow-up" aria-hidden="true"></i></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="item">
+					<img src="http://placehold.it/1600x700?text=Product+02">
+				</div>
+				<div class="item">
+					<img src="http://placehold.it/1600x700?text=Product+03">
+				</div>
+				<div class="item">
+					<img src="http://placehold.it/1600x700?text=Product+04">
+				</div>
+				<div class="item">
+					<img src="http://placehold.it/1600x700?text=Product+05">
+				</div>
+				<div class="item">
+					<img src="http://placehold.it/1600x700?text=Product+06">
+				</div>
+				<div class="item">
+					<img src="http://placehold.it/1600x700?text=Product+07">
+				</div>
+				<div class="item">
+					<img src="http://placehold.it/1600x700?text=Product+08">
+				</div>
+				<div class="item">
+					<img src="http://placehold.it/1600x700?text=Product+09">
+				</div>
+				<div class="item">
+					<img src="http://placehold.it/1600x700?text=Product+10">
+				</div>
+			</div>
+		</div>
+		<div class="clearfix">
+			<div id="thumbcarousel" class="carousel slide" data-interval="false">
+				<div class="carousel-inner">
+					<div class="item active">
+						<div data-target="#carousel" data-slide-to="0" class="thumb">
+							<img
+								src="https://demo2.rambee.website/assets/spend-insights/thumb.png">
+						</div>
+						<div data-target="#carousel" data-slide-to="1" class="thumb">
+							<img
+								src="https://demo2.rambee.website/assets/spend-insights/thumb.png">
+						</div>
+						<div data-target="#carousel" data-slide-to="2" class="thumb">
+							<img
+								src="https://demo2.rambee.website/assets/spend-insights/thumb.png">
+						</div>
+					</div>
+					<div class="item">
+						<div data-target="#carousel" data-slide-to="5" class="thumb">
+							<img
+								src="https://demo2.rambee.website/assets/spend-insights/thumb.png">
+						</div>
+						<div data-target="#carousel" data-slide-to="6" class="thumb">
+							<img
+								src="https://demo2.rambee.website/assets/spend-insights/thumb.png">
+						</div>
+
+					</div>
+				</div>
+				<!-- /carousel-inner -->
+				<a class="left carousel-control" href="#thumbcarousel" role="button"
+					data-slide="prev"> <i class="fa fa-angle-left"
+					aria-hidden="true"></i>
+				</a> <a class="right carousel-control" href="#thumbcarousel"
+					role="button" data-slide="next"><i class="fa fa-angle-right"
+					aria-hidden="true"></i> </a>
+			</div>
+			<!-- /thumbcarousel -->
+
+		</div>
+	</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+	var ctx = document.getElementById('c1').getContext('2d');
+	var chart = new Chart(ctx, {
+		// The type of chart we want to create
+		type : 'line',
+
+		// The data for our dataset
+		data : {
+			labels : [ 'January', 'February', 'March', 'April', 'May', 'June',
+					'July' ],
+			datasets : [ {
+				backgroundColor : '#28a7458c',
+				borderColor : '#52ab66',
+				data : [ 15, 30, 50, 22, 20, 10, 5 ]
+			} ]
+		},
+
+		// Configuration options go here
+		options : {
+			tooltips : {
+				enabled : false
+			},
+			elements : {
+				point : {
+					radius : 0
+				}
+			},
+			legend : {
+				display : false
+			},
+			scales : {
+				yAxes : [ {
+					gridLines : {
+						display : false,
+						drawBorder : false
+					},
+					ticks : {
+						display : false,
+						drawBorder : false
+					}
+				} ],
+				xAxes : [ {
+					gridLines : {
+						display : false
+					},
+					ticks : {
+						display : false
+					}
+				} ]
+			}
+		}
+	});
+</script>
+</html>

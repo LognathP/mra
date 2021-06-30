@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+ 
+ <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+   
+    <style type="text/css">
+      html,
+      body,
+      #map {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+	 
+	 .btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+#mapbox
+{
+height: 85%;
+width:100%;
+}
+      .nicebox {
+        position: absolute;
+        text-align: center;
+        font-family: "Roboto", "Arial", sans-serif;
+        font-size: 10px;
+        z-index: 5;
+        background: white;
+		display:none;
+		 top: 10px;
+		 left :5px;
+      }
+	  .buttonbox {
+		
+        position: absolute;
+        text-align: center;
+        font-family: "Roboto", "Arial", sans-serif;
+        font-size: 13px;
+        z-index: 5;
+       
+      }
+
+      #controls {
+        top: 10px;
+        left: 20%;
+        width: 520px;
+        height: 45px;
+      }
+
+
+      #census-variable {
+        width: 360px;
+        height: 20px;
+      }
+
+      #legend {
+        display: flex;
+        display: -webkit-box;
+        padding-top: 7px;
+      }
+
+      .color-key {
+        background: linear-gradient(
+          to right,
+          #db4639 0%,
+          #db7f29 17%,
+          #d1bf1f 33%,
+          #92c51b 50%,
+          #48ba17 67%,
+          #12ab24 83%,
+          #0f9f59 100%
+        );
+        flex: 1;
+        -webkit-box-flex: 1;
+        margin: 0 5px;
+        text-align: left;
+        font-size: 1em;
+        line-height: 1em;
+      }
+
+      #data-value {
+        font-size: 12px;
+        font-weight: normal;
+      }
+
+      #data-label {
+        font-size: 12px;
+        font-weight: normal;
+        padding-right: 8px;
+      }
+	  
+	  .layout-align-center-center {
+ -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-align-content: center;
+      justify-content: center;
+
+    max-width: 100%;}
+	.market-highlights-legend .market-highlights-legend-labels {
+    width: 100%;
+    margin: 0 auto;
+}
+ .market-highlights-negative-legend-range
+ {
+ float: left;
+    width: 50%;
+    height: 25px;
+    opacity: .55;
+    background: linear-gradient(to right,#8A342B,#57711B);
+ }
+ .market-highlights-positive-legend-range
+ {
+    float: right;
+    width: 50%;
+    height: 25px;
+    opacity: .55;
+    background: linear-gradient(to right,#57711B,#0F5735);
+ }
+.market-highlights-legend {
+    margin: 24px auto;
+    width: 60%;
+}
+
+element.style {
+}
+.market-highlights-legend .market-highlights-legend-labels {
+    width: 100%;
+    margin: 0 auto;
+}
+.layout-row {
+    -webkit-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+}
+.layout-column, .layout-row {
+    -webkit-box-direction: normal;
+}
+.layout, .layout-column, .layout-row {
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+}
+.layout-align-center-center, .layout-align-end-center, .layout-align-space-around-center, .layout-align-space-between-center, .layout-align-start-center {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-align-content: center;
+    align-content: center;
+    max-width: 100%;
+}
+.layout-align-space-between, .layout-align-space-between-center, .layout-align-space-between-end, .layout-align-space-between-start, .layout-align-space-between-stretch {
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+var dataJsonUrl = "http://localhost:5000/mra/DP02_0066RI"; // Input Data in Json format Keep data in same format
+var geoJsonUrl = "http://localhost:5000/mra/patterns/"; //Geogson data for zip code boundary coordinates - No Changes required
+
+var usStates = {
+    "AL": "al_alabama",
+    "AK": "ak_alaska",
+	"AZ": "az_arizona",
+    "AR": "ar_arkansas",
+	"CA": "ca_california",
+    "CO": "co_colorado",
+	"CT": "ct_connecticut",
+    "DE": "de_delaware",
+	"DC": "dc_district_of_columbia",
+    "FL": "fl_florida",
+	"GA": "ga_georgia",
+    "HI": "hi_hawaii",
+	"ID": "id_idaho",
+    "IL": "il_illinois",
+	"IN": "in_indiana",
+    "IA": "ia_iowa",
+	"KS": "ks_kansas",
+    "KY": "ky_kentucky",
+	"LA": "la_louisiana",
+    "ME": "me_maine",
+	"MD": "md_maryland",
+    "MA": "ma_massachusetts",
+	"MI": "mi_michigan",
+    "MN": "mn_minnesota",
+	"MS": "ms_mississippi",
+    "MO": "mo_missouri",
+	"MT": "mt_montana",
+    "NE": "ne_nebraska",
+	"NV": "nv_nevada",
+    "NH": "nh_new_hampshire",
+	"NJ": "nj_new_jersey",
+    "NM": "nm_new_mexico",
+	"NY": "ny_new_york",
+    "NC": "nc_north_carolina",
+	"ND": "nd_north_dakota",
+    "OH": "oh_ohio",
+	"OK": "ok_oklahoma",
+    "OR": "or_oregon",
+	"PA": "pa_pennsylvania",
+    "RI": "ri_rhode_island",
+	"SC": "sc_south_carolina",
+    "SD": "sd_south_dakota",
+	"TN": "tn_tennessee",
+    "TX": "tx_texas",
+	"UT": "ut_utah",
+    "VT": "vt_vermont",
+	"VA": "va_virginia",
+    "WA": "wa_washington",
+	"WV": "wv_west_virginia",
+    "WI": "wi_wisconsin",
+	"WY": "wy_wyoming"
+};
+
+var usrAdd = "RI 02818"; // Crucial input data for loading map and data calculation
+
+usrAdd = usrAdd.replace(/ +/g, "");
+var stateCodeJson = usStates[usrAdd.substring(0, 2)];
+var fixedRad = 16; //Fixed boudary radius to load map around the center point
+
+  var userPin = usrAdd.substring(2); //User zipcode data
+	var lat;
+	var lng;
+	let feat;
+  function industryOutlook() {
+    $.ajax({
+        type: "GET",
+        url: geoJsonUrl+stateCodeJson+"_zip_codes_geo.min.json",
+        dataType: "JSON",
+        success: function (data) {
+	feat = data.features;
+
+	for(i=0;i<data.features.length;i++)
+	{
+	if(data.features[i].properties.ZCTA5CE10 == userPin)
+	{
+	lat = data.features[i].properties.INTPTLAT10; // Latitude of User zipcode 
+	lng = data.features[i].properties.INTPTLON10; // Longitude of User zipcode
+	break;
+	}
+	}
+ 
+        },
+        error: function (data) {
+            console.log(data);
+        }
+    });
+}
+
+function getvalidCord(lat1,lon1,lat2,lon2)
+{
+
+var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(lat2-lat1);  // deg2rad below
+  var dLon = deg2rad(lon2-lon1); 
+  var a = 
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+    Math.sin(dLon/2) * Math.sin(dLon/2)
+    ; 
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  var d = R * c; // Distance in km
+	return d/1.609;
+function deg2rad(deg) {
+  return deg * (Math.PI/180)
+}
+}
+
+	
+	$(document).on("click", ".btn", function () {
+	
+	var x = document.getElementsByClassName("btn");
+	var i;
+	for (i = 0; i < x.length; i++) {
+  x[i].removeAttribute("style");
+}	if($(this).val() == 'ST')
+{
+initStateMap();
+}
+else
+{
+	map.setZoom(parseInt($(this).val()));
+
+}
+	$(this).css('background-color','#0c92e5');
+	$(this).css('color','#fff');
+	
+});
+	
+      const mapStyle = [{"featureType":"administrative.country","elementType":"geometry","stylers":[{"visibility":"simplified"},{"hue":"#ff0000"}]}];
+      let map;
+      let censusMin = Number.MAX_VALUE,
+        censusMax = -Number.MAX_VALUE;
+		
+		
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+    async function initMap() {
+	industryOutlook();
+	await sleep(5000);
+console.log(lat);
+console.log(lng);
+        // load the map
+        console.log(mapStyle);
+        map = new google.maps.Map(document.getElementById("map"), {
+          center: { lat: parseFloat(lat), lng: parseFloat(lng) },
+          zoom: 12,
+		  streetViewControl: true,
+		  mapTypeControl: false,
+          styles: mapStyle,
+        });
+		
+        // set up the style rules and events for google.maps.Data
+        map.data.setStyle(styleFeature);
+        map.data.addListener("mouseover", mouseInToRegion);
+        map.data.addListener("mouseout", mouseOutOfRegion);
+        // wire up the button
+        const selectBox = document.getElementsByClassName("btn");
+        google.maps.event.addListener(selectBox, "click", () => {
+          clearCensusData();
+          loadCensusData(dataJsonUrl);
+        });
+        // state polygons only need to be loaded once, do them now
+        loadMapShapes();
+      }
+	  
+	  function initStateMap() {
+
+        // load the map
+        map = new google.maps.Map(document.getElementById("map"), {
+          center: { lat: parseFloat(lat), lng: parseFloat(lng) },
+          zoom: 10,
+		  streetViewControl: true,
+		  mapTypeControl: false,
+          styles: mapStyle,
+        });
+		
+        // set up the style rules and events for google.maps.Data
+        map.data.setStyle(styleFeatureState);
+        map.data.addListener("mouseover", mouseInToRegion);
+        map.data.addListener("mouseout", mouseOutOfRegion);
+        // wire up the button
+        const selectBox = document.getElementsByClassName("btn");
+        google.maps.event.addListener(selectBox, "click", () => {
+          clearCensusData();
+          loadCensusData(dataJsonUrl);
+        });
+        // state polygons only need to be loaded once, do them now
+        loadMapShapes();
+      }
+	  
+
+      /** Loads the state boundary polygons from a GeoJSON source. */
+      function loadMapShapes() {
+        // load US state outline polygons from a GeoJson file
+        map.data.loadGeoJson(geoJsonUrl+stateCodeJson+"_zip_codes_geo.min.json",{ idPropertyName: "ZCTA5CE10" }
+        );
+		
+        // wait for the request to complete by listening for the first feature to be
+        // added
+        google.maps.event.addListener(map.data, "addfeature", () => {
+          google.maps.event.trigger(
+            document.getElementsByClassName("btn"),
+            "click"
+          );
+        });
+      }
+
+      /**
+       * Loads the census data from a simulated API call to the US Census API.
+       *
+       * @param {string} variable
+       */
+      function loadCensusData(variable) {
+        // load the requested variable from the census API (using local copies)
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", variable + ".json");
+
+        xhr.onload = function () {
+          const censusData = JSON.parse(xhr.responseText);
+          censusData.shift(); // the first row contains column names
+          censusData.forEach((row) => {
+            const censusVariable = parseFloat(row[0]);
+            const stateId = row[1];
+			//console.log(censusVariable);
+			//console.log(stateId);
+			
+ 
+            // keep track of min and max values
+            if (censusVariable < censusMin) {
+              censusMin = censusVariable;
+            }
+
+            if (censusVariable > censusMax) {
+              censusMax = censusVariable;
+            }
+            // update the existing row with the new data
+            map.data
+              .getFeatureById(stateId)
+              .setProperty("census_variable", censusVariable);
+			  
+          });
+          // update and display the legend
+          document.getElementById(
+            "census-min"
+          ).textContent = censusMin.toLocaleString();
+          document.getElementById(
+            "census-max"
+          ).textContent = censusMax.toLocaleString();
+        };
+        xhr.send();
+      }
+
+      /** Removes census data from each shape on the map and resets the UI. */
+      function clearCensusData() {
+        censusMin = Number.MAX_VALUE;
+        censusMax = -Number.MAX_VALUE;
+        map.data.forEach((row) => {
+          row.setProperty("census_variable", undefined);
+        });
+        document.getElementById("data-box").style.display = "none";
+      }
+
+      /**
+       * Applies a gradient style based on the 'census_variable' column.
+       * This is the callback passed to data.setStyle() and is called for each row in
+       * the data set.  Check out the docs for Data.StylingFunction.
+       *
+       * @param {google.maps.Data.Feature} feature
+       */
+      function styleFeature(feature) {
+    	// console.log(feature);
+	  var rad = getvalidCord(lat,lng,feature.i.INTPTLAT10,feature.i.INTPTLON10);
+	 // console.log(rad + "  -  " + feature.o);
+	 //console.log(rad)
+	  if(rad<fixedRad)
+	{
+	
+	    const low = [5, 69, 54]; // color of smallest datum
+        const high = [151, 83, 34]; // color of largest datum
+        // delta represents where the value sits between the min and max
+        
+		const delta =
+          (feature.getProperty("census_variable") - censusMin) /
+          (censusMax - censusMin);
+        const color = [];
+        for (let i = 0; i < 3; i++) {
+          // calculate an integer color based on the delta
+          color.push((high[i] - low[i]) * delta + low[i]);
+        }
+		//console.log(color + '  ' + feature.getProperty("census_variable"));
+        // determine whether to show this shape or not
+        let showRow = true;
+
+        if (
+          feature.getProperty("census_variable") == null ||
+          isNaN(feature.getProperty("census_variable"))
+        ) {
+          showRow = false;
+        }
+        let outlineWeight = 0.5,
+          zIndex = 1;
+		let strokeclor = "#fff";
+
+        if (feature.getProperty("state") === "hover") {
+          outlineWeight = zIndex = 2;
+        }
+		
+		 if (feature.o === userPin) {
+          outlineWeight = zIndex = 4;
+		  strokeclor = "#2077b3";
+        }
+		
+		
+        return {
+          strokeWeight: outlineWeight,
+          strokeColor: strokeclor,
+          zIndex: zIndex,
+          fillColor:
+            "hsl(" + color[0] + "," + color[1] + "%," + color[2] + "%)",
+          fillOpacity: 0.55,
+          visible: showRow,
+        };
+		
+		}
+		else
+		{
+		return {
+          strokeWeight: 0,
+          visible: false,
+        };
+		
+}
+		
+      }
+	  
+	  function styleFeatureState(feature) {
+
+	    const low = [5, 69, 54]; // color of smallest datum
+        const high = [151, 83, 34]; // color of largest datum
+        // delta represents where the value sits between the min and max
+        
+		const delta =
+          (feature.getProperty("census_variable") - censusMin) /
+          (censusMax - censusMin);
+        const color = [];
+        for (let i = 0; i < 3; i++) {
+          // calculate an integer color based on the delta
+          color.push((high[i] - low[i]) * delta + low[i]);
+        }
+		//console.log(color + '  ' + feature.getProperty("census_variable"));
+        // determine whether to show this shape or not
+        let showRow = true;
+
+        if (
+          feature.getProperty("census_variable") == null ||
+          isNaN(feature.getProperty("census_variable"))
+        ) {
+          showRow = false;
+        }
+        let outlineWeight = 0.5,
+          zIndex = 1;
+		let strokeclor = "#fff";
+
+        if (feature.getProperty("state") === "hover") {
+          outlineWeight = zIndex = 2;
+        }
+		
+		 if (feature.o === userPin) {
+          outlineWeight = zIndex = 4;
+		  strokeclor = "#2077b3";
+        }
+		
+		
+        return {
+          strokeWeight: outlineWeight,
+          strokeColor: strokeclor,
+          zIndex: zIndex,
+          fillColor:
+            "hsl(" + color[0] + "," + color[1] + "%," + color[2] + "%)",
+          fillOpacity: 0.55,
+          visible: showRow,
+        };
+		
+		}
+			
+          /**
+       * Responds to the mouse-in event on a map shape (state).
+       *
+       * @param {?google.maps.MouseEvent} e
+       */
+      function mouseInToRegion(e) {
+        // set the hover state so the setStyle function can change the border
+        e.feature.setProperty("state", "hover");
+        const percent =
+          ((e.feature.getProperty("census_variable") - censusMin) /
+            (censusMax - censusMin)) *
+          100;
+        // update the label
+        document.getElementById(
+          "data-label"
+        ).textContent = 'ZipCode: '+e.feature.getProperty("ZCTA5CE10");
+        document.getElementById(
+          "data-value"
+        ).textContent = 'Growth: '+e.feature
+          .getProperty("census_variable")
+          .toLocaleString() + ' %';
+        document.getElementById("data-box").style.display = "block";
+      
+
+      }
+
+      /**
+       * Responds to the mouse-out event on a map shape (state).
+       *
+       */
+      function mouseOutOfRegion(e) {
+        // reset the hover state, returning the border to normal
+        e.feature.setProperty("state", "normal");
+		 document.getElementById("data-box").style.display = "none";
+      }
+	  
+	</script>
+	<!-- 75@gmail.com -->
+	<script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnqDOR4VhSby929Q4kdWaz8z5B0PdgvrY&callback=initMap&libraries=&v=weekly"
+      async defer
+    ></script>
+  </head>
+  <body>
+    <div id="data-box" class="nicebox">
+      <label id="data-label" for="data-value"></label>
+      <span id="data-value"></span>
+    </div>
+  <div id="controls" class="buttonbox">
+
+		<button class="btn" value="14" >1 MILE</button>
+       <button class="btn" value="13" >2 MILES</button>
+       <button class="btn" value="12" >4 MILES</button>
+       <button class="btn" value="11" >8 MILES</button>
+       <button class="btn" value="10" >16 MILES</button>
+	   <button class="btn" value="ST" >STATE MAP</button>
+   </div>
+    
+	   
+        <select id="census-variable" style="display:none;">
+          <!-- <option -->
+            <!-- value="http://127.0.0.1:8887/DP02_0066PE" -->
+          <!-- > -->
+            <!-- Success Rate -->
+          <!-- </option> -->
+          <!-- <option -->
+            <!-- value="https://storage.googleapis.com/mapsdevsite/json/DP05_0017E" -->
+          <!-- > -->
+            <!-- Median age -->
+          <!-- </option> -->
+          <!-- <option -->
+            <!-- value="https://storage.googleapis.com/mapsdevsite/json/DP05_0001E" -->
+          <!-- > -->
+            <!-- Total population -->
+          <!-- </option> -->
+          <!-- <option -->
+            <!-- value="https://storage.googleapis.com/mapsdevsite/json/DP02_0016E" -->
+          <!-- > -->
+            <!-- Average family size -->
+          <!-- </option> -->
+          <!-- <option -->
+            <!-- value="https://storage.googleapis.com/mapsdevsite/json/DP03_0088E" -->
+          <!-- > -->
+            <!-- Per-capita income -->
+          <!-- </option> -->
+		
+		  
+        </select>
+      <div id="legend" style="display:none;">
+        <div id="census-min">min</div>
+        <div class="color-key"><span id="data-caret">&#x25c6;</span></div>
+        <div id="census-max">max</div>
+      </div>
+	 
+	<div id="mapbox">
+	
+	<div id="map"></div>
+	<div class="market-highlights-legend qa-growth-legend"> <div layout="row" layout-align="center center" class="layout-align-center-center layout-row"> <div class="market-highlights-negative-legend-range"></div> <div class="market-highlights-positive-legend-range"></div> </div> <div class="market-highlights-legend-labels layout-align-space-between-center layout-row" layout="row" layout-align="space-between center"> <span class="ng-binding">-50%</span> <span>0%</span> <span class="ng-binding">50%</span> </div> </div>
+	</div>
+	 				
+	
+  </body>
+   
+</html>

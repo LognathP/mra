@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+	<title>Admin Dashboard</title>
+	<!-- BOOTSTRAP CORE STYLE  -->
+	<link href="css/bootstrap.css" rel="stylesheet" />
+	<!-- FONT AWESOME STYLE  -->
+	<link href="css/font-awesome.css" rel="stylesheet" />
+	<!-- CUSTOM STYLE  -->
+	<link href="css/style.css" rel="stylesheet" />
+	<link href="img/favicon.png" rel="shortcut icon">
+		<!-- GOOGLE FONT -->
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+	<link href="css/jquery.toast.css" rel="stylesheet" />
+
+<style>
+.pac-container:after{
+    content:none !important;
+}
+</style>
+</head>
+
+<body>
+
+	<!-- LOGO HEADER END-->
+	<section class="menu-section">
+		<div class="container">
+			<div class="row ">
+				<div class="col-md-12">
+					<div class="navbar-collapse collapse ">
+					<img src="img/logo.png" />
+						<ul id="menu-top" class="nav navbar-nav navbar-right">
+						<li class="lite"><a href="customer.html">Home</a></li>
+							<li class="lite"><a href="index.html">Dashboard</a></li>
+							<li><a href="user.html">User Management</a></li>
+							<li><a href="product.html">Product Management</a></li>
+							<li><a href="order.html">Order Management</a></li>
+							<!-- <li><a href="form.html">FORMS</a></li>
+							<li>
+								<a href="#" class="dropdown-toggle" id="ddlmenuItem" data-toggle="dropdown">UI ELEMENTS
+									<i class="fa fa-angle-down"></i></a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="ddlmenuItem">
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="ui.html">UI
+											ELEMENTS</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="#">EXAMPLE LINK</a>
+									</li>
+								</ul>
+							</li>
+							<li><a href="tab.html">TABS & PANELS</a></li>
+
+							<li><a href="table.html">TABLES</a></li>
+							<li><a href="blank.html">BLANK PAGE</a></li> -->
+
+						</ul>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+	<!-- MENU SECTION END-->
+	<div class="content-wrapper">
+		<div class="container">
+			<div class="row pad-botm">
+				<div class="col-md-12">
+					<h4 class="header-line">CUSTOMER HOME</h4>
+
+				</div>
+
+			</div>
+
+			<div class="row">
+			<form role="form">
+					<div class="form-group">
+<div class="col-md-3 col-sm-3 col-xs-6">
+					<select class="form-control" id="user_type">
+									<option value="" disabled selected>User Type</option>
+					</select>
+				</div>
+				<div class="col-md-3 col-sm-3 col-xs-6">
+										<input class="form-control" id="ut_cover_area" placeholder="Location" type="text" required />
+					
+				</div>
+				<div class="col-md-3 col-sm-3 col-xs-6">
+					
+					<select class="form-control" id="prod_list">
+									<option value="" disabled selected>Product</option>
+					</select>
+				</div>
+				<div class="col-md-3 col-sm-3 col-xs-6">
+								
+					
+					<button type="submit" id="proceed" class="btn btn-info">Proceed</button>
+					
+					
+				</div>
+				
+
+			</div>
+			</form>
+			</div>
+			<input type="hidden" id="lat"/>
+			<input type="hidden" id="lng"/>
+			<input type="hidden" id="cover_area"/>
+			<input type="hidden" id="area_limit"/>
+			
+</div>
+	</div>
+	<!-- CONTENT-WRAPPER SECTION END-->
+	<section class="footer-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					&copy; 2020 www.unscrapp.com
+				</div>
+
+			</div>
+		</div>
+	</section>
+	<!-- FOOTER SECTION END-->
+	<!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
+	<!-- CORE JQUERY  -->
+	<script src="js/jquery-1.10.2.js"></script>
+	<!-- BOOTSTRAP SCRIPTS  -->
+	<script src="js/bootstrap.js"></script>
+	<!-- CUSTOM SCRIPTS  -->
+	<script src="js/customerhome.js"></script>
+	<script src="js/api-common.js"></script>
+	<script src="js/searchlocation.js"></script>
+	<script src="js/jquery.toast.js"></script>
+	
+	
+	
+
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6f5JZ9BzaTZBU9kPP7CnB47x6-YLR8Sc&libraries=places&callback=initAutocomplete"
+		async defer></script>
+
+</body>
+
+</html>

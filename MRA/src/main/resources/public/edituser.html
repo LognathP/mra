@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+	<title>Admin Dashboard</title>
+	<!-- BOOTSTRAP CORE STYLE  -->
+	<link href="css/bootstrap.css" rel="stylesheet" />
+	<!-- FONT AWESOME STYLE  -->
+	<link href="css/font-awesome.css" rel="stylesheet" />
+	<!-- CUSTOM STYLE  -->
+	<link href="css/style.css" rel="stylesheet" />
+	<link href="css/custom.css" rel="stylesheet" />
+	<link href="css/map.css" rel="stylesheet" />
+	<link href="img/favicon.png" rel="shortcut icon">
+	<link href="css/jquery.toast.css" rel="stylesheet" />
+	<!-- GOOGLE FONT -->
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+	<!-- LOGO HEADER END-->
+	<section class="menu-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="navbar-collapse collapse ">
+					<img src="img/logo.png" />
+						<ul id="menu-top" class="nav navbar-nav navbar-right">
+							<li class="lite"><a href="customer.html">Home</a></li>
+							<li><a href="index.html" class="menu-top-active">Dashboard</a></li>
+							<li><a href="user.html">User Management</a></li>
+							<li><a href="product.html">Product Management</a></li>
+							<li><a href="order.html">Order Management</a></li>
+							<!-- <li><a href="form.html">FORMS</a></li>
+							<li>
+								<a href="#" class="dropdown-toggle" id="ddlmenuItem" data-toggle="dropdown">UI ELEMENTS
+									<i class="fa fa-angle-down"></i></a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="ddlmenuItem">
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="ui.html">UI
+											ELEMENTS</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="#">EXAMPLE LINK</a>
+									</li>
+								</ul>
+							</li>
+							<li><a href="tab.html">TABS & PANELS</a></li>
+
+							<li><a href="table.html">TABLES</a></li>
+							<li><a href="blank.html">BLANK PAGE</a></li> -->
+
+						</ul>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+	<!-- MENU SECTION END-->
+	<div class="content-wrapper">
+		<div class="container">
+			<div class="row pad-botm">
+				<div class="col-md-12">
+					<h4 class="header-line">EDIT USER</h4>
+
+				</div>
+
+			</div>
+			<div class="row">
+				<div class="col-md-3 col-sm-3 col-xs-5">
+					<div class="panel panel-info">
+						<div class="panel-heading">
+							USER TYPE DETAILS
+						</div>
+						<div class="panel-body">
+							<form role="form">
+								<div class="form-group">
+									<input class="form-control" id="ut_name" placeholder="User Type" required
+										type="text" />
+								</div>
+								<div class="form-group">
+									<input class="form-control" id="ut_desc" placeholder="Description" type="text"
+										required />
+								</div>
+								<div class="form-group">
+									<input class="form-control" id="ut_cover_area" placeholder="Coverage Area" required
+										type="text" />
+								</div>
+								<div class="form-group">
+									<input class="form-control" id="ut_area_limit" placeholder="Area Limit" required
+										type="number" />
+								</div>
+
+								<button type="submit" class="btn btn-info">Update</button>
+								<a class="btn btn-default" href="index.html">Cancel</a>
+
+							</form>
+							<br>
+							<div id="response">
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="col-md-9 col-sm-9 col-xs-7">
+					<div style="height: 500px; width: 845px;">
+						<div id="map"></div>
+						<div id="infowindow-content">
+							<img src="" width="16" height="16" id="place-icon">
+							<span id="place-name" class="title"></span><br>
+							<span id="place-address"></span>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<input id="ut_id" type="hidden" />
+			<input type="hidden" id="lat" />
+			<input type="hidden" id="lng" />
+
+
+		</div>
+
+	</div>
+	</div>
+	<!-- CONTENT-WRAPPER SECTION END-->
+	<section class="footer-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					&copy; 2020 www.unscrapp.com
+				</div>
+
+			</div>
+		</div>
+	</section>
+	<!-- FOOTER SECTION END-->
+	<!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
+	<!-- CORE JQUERY  -->
+	<script src="js/jquery-1.10.2.js"></script>
+	<!-- BOOTSTRAP SCRIPTS  -->
+	<script src="js/bootstrap.js"></script>
+	<!-- CUSTOM SCRIPTS  -->
+	<script src="js/edit-usertype.js"></script>
+	<script src="js/api-common.js"></script>
+	<script src="js/map.js"></script>
+	<script src="js/jquery.toast.js"></script>
+	
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6f5JZ9BzaTZBU9kPP7CnB47x6-YLR8Sc&libraries=places&callback=initMap"
+		defer></script>
+
+</body>
+
+</html>

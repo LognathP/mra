@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+<title>Admin-Categories & Collections</title>
+<!-- BOOTSTRAP CORE STYLE  -->
+<link href="css/bootstrap.css" rel="stylesheet" />
+<!-- FONT AWESOME STYLE  -->
+<link href="css/font-awesome.css" rel="stylesheet" />
+<!-- DATATABLE STYLE  -->
+<link href="js/dataTables/dataTables.bootstrap4.css" rel="stylesheet" />
+<!-- CUSTOM STYLE  -->
+<link href="css/style.css" rel="stylesheet" />
+<link href="css/custom.css" rel="stylesheet" />
+<link href="img/favicon.png" rel="shortcut icon">
+<link href="css/jquery.toast.css" rel="stylesheet" />
+
+<!-- GOOGLE FONT -->
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&amp;display=swap"
+	rel="stylesheet">
+
+</head>
+
+<body>
+
+	<!-- LOGO HEADER END-->
+	<section class="menu-section">
+
+		<div class="container">
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="navbar-collapse collapse ">
+						<img src="img/logo.png" alt="" />
+						<ul id="menu-top" class="nav navbar-nav navbar-right">
+							<li><a href="index.html" class="menu-top-active">Dashboard</a></li>
+							<li><a href="user.html">User Management</a></li>
+							<li><a href="product.html">Product Management</a></li>
+							<!-- <li><a href="#">Product Management</a>
+							<ul class="dropdown-menu" role="menu" aria-labelledby="ddlmenuItem">
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="product.html">product category
+									</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="subproduct.html">sub product category</a>
+									</li>
+								</ul></li> -->
+							<li><a href="order.html">Order Management</a></li>
+							<!-- 	<li><a href="form.html">FORMS</a></li>
+							<li>
+								<a href="#" class="dropdown-toggle" id="ddlmenuItem" data-toggle="dropdown">UI ELEMENTS
+									<i class="fa fa-angle-down"></i></a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="ddlmenuItem">
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="ui.html">UI
+											ELEMENTS</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="#">EXAMPLE LINK</a>
+									</li>
+								</ul>
+							</li>
+							<li><a href="tab.html">TABS & PANELS</a></li>
+
+							<li><a href="table.html">TABLES</a></li>
+							<li><a href="blank.html">BLANK PAGE</a></li> -->
+
+						</ul>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+	<!-- MENU SECTION END-->
+	<div class="content-wrapper">
+		<div class="container">
+
+			<div class="col-md-12">
+				<h4 class="header-line"><i class="fas fa-warehouse fa-2x"></i> &nbsp; CATEGORY & COLLECTION</h4>
+			</div>
+	
+			<div class="row">
+				<div class="col-md-12 col-sm-12">
+					<div class="panel-body">
+						<ul class="nav nav-tabs">
+							<li class="active"><a href="#categories" data-toggle="tab">Categories</a>
+							</li>
+							<li class=""><a href="#collections" id="subProdTab" data-toggle="tab">Collections</a></li>
+
+						</ul>
+						<br>
+						<div class="tab-content">
+							<div class="tab-pane fade active in" id="categories">
+								<div class="row">
+									<div class="col-md-2 col-sm-6 col-xs-12">
+										<a class="btn btn-info" id="prod" data-toggle="modal"
+											data-target="#myModal">Add Category</a>
+									</div>
+								</div>
+								<br>
+								<div class="row">
+
+									<div class="col-md-12">
+										<!-- Advanced Tables -->
+										<div class="panel panel-default">
+											<div class="panel-heading">Category List</div>
+											<div class="panel-body">
+
+												<div class="table-responsive">
+
+													<table
+														class="table table-striped table-bordered table-hover display compact"
+														id="dataTables-example">
+														<thead>
+															<tr>
+																<th>Category</th>
+																<th>Modify</th>
+															</tr>
+														</thead>
+														<tbody>
+														</tbody>
+													</table>
+												</div>
+
+											</div>
+										</div>
+										<!--End Advanced Tables -->
+									</div>
+								</div>
+
+							</div>
+							<div class="tab-pane fade" id="subproduct">
+								<div class="row">
+									<div class="col-md-2 col-sm-6 col-xs-12">
+										<a class="btn btn-info" id="subprod" data-toggle="modal"
+											data-target="#myModal1">Add Collection</a>
+									</div>
+								</div>
+								<br>
+								<div class="row">
+
+									<div class="col-md-12">
+										<!-- Advanced Tables -->
+										<div class="panel panel-default">
+											<div class="panel-heading">Collection List</div>
+											<div class="panel-body">
+
+												<div class="table-responsive">
+
+													<table
+														class="table table-striped table-bordered table-hover display compact"
+														id="dataTables-example1">
+														<thead>
+															<tr>
+																<th>Collection</th>
+																<th>Modify</th>
+															</tr>
+														</thead>
+														<tbody>
+														</tbody>
+													</table>
+												</div>
+
+											</div>
+										</div>
+										<!--End Advanced Tables -->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+		</div>
+	</div>
+	<!-- CONTENT-WRAPPER SECTION END-->
+	<section class="footer-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">&copy; 2020 www.unscrapp.com</div>
+
+			</div>
+		</div>
+
+
+		<!-- Modal -->
+		<div id="myModal" class="modal fade" role="dialog"
+			data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog modal-sm">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<i class="fa fa-times" aria-hidden="true"></i>
+						</button>
+						<h5 class="modal-title pull-left">Add Category</h5>
+					</div>
+					<div class="modal-body">
+
+						<form role="form" action="">
+							<input type="hidden" id="pid" />
+							<div class="form-group">
+								<input class="form-control" id="prod_name" placeholder="Product"
+									type="text" required />
+							</div>
+							<div class="form-group">
+								<input class="form-control" id="prod_desc"
+									placeholder="Description" type="text" required />
+							</div>
+
+							<button type="submit" id="btnAdd" class="btn btn-info">Save</button>
+							<button type="reset" class="btn btn-default">Clear</button>
+
+						</form>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+		<!-- Modal -->
+		<div id="myModalEdit" class="modal fade" role="dialog"
+			data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog modal-sm">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<i class="fa fa-times" aria-hidden="true"></i>
+						</button>
+						<h5 class="modal-title pull-left">Edit Product</h5>
+						
+					</div>
+					<div class="modal-body">
+
+						<form role="form" action="">
+							<div class="form-group">
+								<input class="form-control" id="prod_name_edit"
+									placeholder="Product" type="text" required />
+							</div>
+							<div class="form-group">
+								<input class="form-control" id="prod_desc_edit"
+									placeholder="Description" type="text" required />
+							</div>
+
+							<button type="submit" id="btnUpd" class="btn btn-info">Update</button>
+
+						</form>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div id="myModal1" class="modal fade" role="dialog"
+			data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog modal-sm">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<i class="fa fa-times" aria-hidden="true"></i>
+						</button>
+						<h5 class="modal-title pull-left">Sub Product</h5>
+						
+					</div>
+					<div class="modal-body">
+							<input type="hidden" id="spid" />
+
+						<form role="form" action="">
+							<div class="form-group">
+								<select class="form-control" id="prod_list">
+									
+								</select>
+							</div>
+							<div class="form-group">
+								<input class="form-control" id="subprod_name" placeholder="Sub Product"
+									type="text" required />
+							</div>
+							<div class="form-group">
+								<input class="form-control" id="subprod_desc"
+									placeholder="Description" type="text" required />
+							</div>
+							
+							<div class="form-group">
+								<select class="form-control" id="prod_unit">
+									<option value="" disabled selected>Unit metrics</option>
+									<option value="1">Kg</option>
+									<option value="2">Nos</option>
+								</select>
+
+							</div>
+
+							<div class="form-group" id="divnos">
+								<input class="form-control" id="price" placeholder="Price"
+										type="number" required />
+							</div>
+							<div id="divkg">
+							<div class="form-group  col-xs-6" >
+								<input class="form-control" id="price1" placeholder="25-250"
+										type="number" required />					
+							</div>
+							<div class="form-group  col-xs-6" >
+								<input class="form-control" id="price2" placeholder="250-500"
+										type="number" required />					
+							</div>
+							<div class="form-group  col-xs-6" >
+								<input class="form-control" id="price3" placeholder="500-750"
+										type="number" required />					
+							</div>
+							<div class="form-group  col-xs-6" >
+								<input class="form-control" id="price4" placeholder="750-1000"
+										type="number" required />					
+							</div>
+							<div class="form-group  col-xs-12" >
+								<input class="form-control" id="price5" placeholder="1000+"
+										type="number" required />					
+							</div>
+							</div>
+							<div id="subproductAdd">
+							<button type="submit" id="btnAddSub" class="btn btn-info">Save</button>
+							<button type="reset" class="btn btn-default">Clear</button>
+							</div>
+							<div id="subproductEdit">
+							<button type="submit" id="btnUpdSub" class="btn btn-info">Update</button>
+							</div>
+ 						</form>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		
+		<div id="myModalViewPrice" class="modal fade" role="dialog"
+			data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog modal-sm">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<i class="fa fa-times" aria-hidden="true"></i>
+						</button>
+						<h5 class="modal-title pull-left">Price Details</h5>
+						
+					</div>
+					<div class="modal-body">
+						<table id="priceTable" class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                     
+                                    </thead>
+                                    <tbody>
+                                      
+                                    </tbody>
+                                </table>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		
+
+	</section>
+	<!-- FOOTER SECTION END-->
+	<!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
+	<!-- CORE JQUERY  -->
+	<script src="js/jquery-1.10.2.js" type="text/javascript"></script>
+	<!-- BOOTSTRAP SCRIPTS  -->
+	<script src="js/bootstrap.js" type="text/javascript"></script>
+	<!-- DATATABLE SCRIPTS  -->
+	<script src="js/dataTables/jquery.dataTables.js" type="text/javascript"></script>
+	<script src="js/dataTables/dataTables.bootstrap4.js"
+		type="text/javascript"></script>
+	<!-- CUSTOM SCRIPTS  -->
+	<script src="js/custom.js" type="text/javascript"></script>
+	<script src="js/products.js" type="text/javascript"></script>
+	<script src="js/api-common.js" type="text/javascript"></script>
+	<script src="js/jquery.toast.js" type="text/javascript"></script>
+	<script src="js/subproducts.js" type="text/javascript"></script>
+	<script src="https://kit.fontawesome.com/c05a1dcebe.js" crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
