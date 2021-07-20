@@ -1,40 +1,46 @@
+var categorydata = JSON.parse(localStorage.getItem("categoryArray"));
+$(document).ready(function () {
 
-function clearPattern()
+	console.log(categorydata);
+	$.each(categorydata, function (index, data) {
+		$('#product_catlist').append("<option value="+data.id+">"+data.text+"</option>");
+	});
+});
+
+function clearSubCategory()
 {
-$('#patid').val('');
-$('#pattern_name').val('');
+$('#subcatid').val('');
+$('#subcategory_name').val('');
 }
 
-function loadPattern()
+function loadSubCategory()
 {
-	$('#dataTables-example3').DataTable().clear();
-	var editButtonHtml = "<a class=\"btn btn-primary btn-sm\" id=\"btnEditPat\" data-toggle=\"modal\" data-target=\"#myModal3\"  ><i class=\"fa fa-edit \"></i> Edit</a>";
-	var deleteButtonHtml = "<a class=\"btn btn-danger btn-sm\" id=\"btnDeletePat\" ><i class=\"fa fa-trash-o \"></i> Delete</a>";
+	$('#dataTables-example6').DataTable().clear();
+	var editButtonHtml = "<a class=\"btn btn-primary btn-sm\" id=\"btnEditSubCat\" data-toggle=\"modal\" data-target=\"#myModal5\"  ><i class=\"fa fa-edit \"></i> Edit</a>";
+	var deleteButtonHtml = "<a class=\"btn btn-danger btn-sm\" id=\"btnDeleteSubCat\" ><i class=\"fa fa-trash-o \"></i> Delete</a>";
 	$.ajax({
 		type: "GET",
-		url: baseUrl + getAllPatterns,
+		url: baseUrl + getAllSubCategories,
 		data: { data: "" },
 		cache: false,
-		success: function (result) {
-			data = JSON.parse(JSON.stringify(result.data));
-			console.log(result);
-			if (result.status == 'OK') {
-				$.each(result.data, function (index, data) {
-					var rowIndex = $('#dataTables-example3').dataTable().fnAddData([
-						data.name,
-						"<img class='zoom' src='"+baseUrl+data.url+"'/>",
+		success: function (subresult) {
+			subdata = JSON.parse(JSON.stringify(subresult.data));
+			console.log(subresult);
+			if (subresult.status == 'OK') {
+				$.each(subresult.data, function (index, data) {
+					var rowIndex = $('#dataTables-example6').dataTable().fnAddData([
+						data.sub_category_name,
 						editButtonHtml + "  " + deleteButtonHtml]
 					);
-					var row = $('#dataTables-example3').dataTable().fnGetNodes(rowIndex);
+					var row = $('#dataTables-example6').dataTable().fnGetNodes(rowIndex);
 					$(row).attr('id', data.id);
 				});
-			
 				
 				
 			}
 			else {
 				$.toast({
-				    text: "Unable to Load Collection Table",
+				    text: "Unable to Load Sub Category Table",
 				    hideAfter: 2000,
 				    icon: 'error',
 				    loader: false,
@@ -64,74 +70,60 @@ function loadPattern()
 		}
 
 	});
+	
 
 }
 
-$(document).on("click", "#btnAddPat", function (event) {
+$(document).on("click", "#btnAddSubCat", function (event) {
 	event.preventDefault();
-	if (($('#pattern_name').val() != '')){
-		if($('#patid').val() !='')
+	if (($('#subcategory_name').val() != '')){
+		if($('#product_catlist').val != 0)
 		{
-			var pattern = {
-					"id":parseInt($('#patid').val()),
-					"pattern_name": $('#pattern_name').val()};
-			savePattern(pattern);
-			//console.log($('#patid').val());
-			//console.log(pattern);
+			var subcategory = {
+					"id":$('#product_catlist').val(),
+					"sub_category_name": $('#subcategory_name').val()};
+			console.log(subcategory);
+			saveSubCategory(subcategory);
 			
-		}
-		else
-		{
-			console.log(pattern);
-			var pattern = {
-					"id":0,
-					"pattern_name": $('#pattern_name').val()};
-			//console.log($('#patid').val());
-			savePattern(pattern);
-			//console.log(pattern);
 		}
 			
 	}
 	else {
-		if ($('#pattern_name').val() == '') {
-			$('#pattern_name').addClass("field-red");
-			$('#pattern_name').removeClass("field-ok");
+		if ($('#subcategory_name').val() == '') {
+			$('#subcategory_name').addClass("field-red");
+			$('#subcategory_name').removeClass("field-ok");
 		}
 		else {
-			$('#pattern_name').addClass("field-ok");
-			$('#pattern_name').removeClass("field-red");
+			$('#subcategory_name').addClass("field-ok");
+			$('#subcategory_name').removeClass("field-red");
 		}
-		if ($('#pattern_file').val() == '') {
-			$('#pattern_file').addClass("field-red");
-			$('#pattern_file').removeClass("field-ok");
+		if ($('#product_catlist').val() == 0) {
+			$('#product_catlist').addClass("field-red");
+			$('#product_catlist').removeClass("field-ok");
 		}
 		else {
-			$('#pattern_file').addClass("field-ok");
-			$('#pattern_file').removeClass("field-red");
+			$('#product_catlist').addClass("field-ok");
+			$('#product_catlist').removeClass("field-red");
 		}
 		
 	}
-
 
 });
 
 
 
-function savePattern(pattern) {
-	
-	 var file = $('#patternUpload')[0];
-	 console.log(file);
-	 var form = new FormData(file);
-	 form.append("name",pattern.pattern_name);
-	 form.append("id",pattern.id);
-	 console.log(form);
+function saveSubCategory(subcategory) {
 	$.ajax({
 		type: "POST",
-		url: baseUrl + addPattern,
-		enctype : 'multipart/form-data',
-		data:form,
+		headers: {
+			'content-type': 'application/json'
+		},
+		url: baseUrl + addSubCategory,
+		dataType: "json",
+		data:  JSON.stringify(subcategory),
 		processData: false,
-        contentType: false,
+		contentType: false,
+		crossDomain: true,
 		async: true,
 		cache: false,
 		timeout: 60000,
@@ -140,7 +132,7 @@ function savePattern(pattern) {
 			console.log("SUCCESS : ", data);
 			if (data.status == 'OK') {
 				$.toast({
-				    text: "Pattern Operation Success",
+				    text: "Sub Category Operation Success",
 				    hideAfter: 2000,
 				    icon: 'success',
 				    loader: false,
@@ -151,13 +143,13 @@ function savePattern(pattern) {
 				});
 				$('.btn-default').click();
 				$('.close').click();
-				loadPattern();
+				loadSubCategory();
 				
 				
 			}
 			else {
 				$.toast({
-				    text: "Unable to do Pattern Operation",
+				    text: "Unable to do Sub Category Operation",
 				    hideAfter: 2000,
 				    icon: 'error',
 				    loader: false,
@@ -191,26 +183,27 @@ function savePattern(pattern) {
 
 }
 
-$(document).on("click", "#btnEditPat", function () {
+$(document).on("click", "#btnEditSubCat", function () {
 	var pid = $(this).closest('tr').attr('id');
 	var row = $(this).closest('tr');
-	$('#patid').val(pid);
-	$('#pattern_name').val(row.find("td:eq(0)").text());
+	$('#subcatid').val(pid);
+	$('#product_catlist').val(pid);
+	$('#subcategory_name').val(row.find("td:eq(0)").text());
 });
 
 
-$(document).on("click", "#btnDeletePat", function () {
+$(document).on("click", "#btnDeleteSubCat", function () {
 	var pid = $(this).closest('tr').attr('id');
-	deletePatternbyId(pid);
+	deleteSubCategorybyId(pid);
 });
 
-function deletePatternbyId(pid) {
+function deleteSubCategorybyId(pid) {
 	$.ajax({
 		type: "DELETE",
 		headers: {
 			'content-type': 'application/json'
 		},
-		url: baseUrl + deletePattern+"/"+pid,
+		url: baseUrl + deleteSubCategory+"/"+pid,
 		crossDomain: true,
 		async: true,
 		timeout: 60000,
@@ -218,7 +211,7 @@ function deletePatternbyId(pid) {
 			console.log("SUCCESS : ", data);
 			if (data.status == 'OK') {
 				$.toast({
-				    text: "Pattern Deleted Successfully",
+				    text: "Sub Category Deleted Successfully",
 				    hideAfter: 2000,
 				    icon: 'success',
 				    loader: false,
@@ -227,12 +220,12 @@ function deletePatternbyId(pid) {
 				    position: 'top-left'
   	
 				});
-				loadPattern();
+				loadCategory();
 				
 			}
 			else {
 				$.toast({
-				    text: "Unable to Delete Collection",
+				    text: "Unable to Delete Sub Category",
 				    hideAfter: 2000,
 				    icon: 'error',
 				    loader: false,

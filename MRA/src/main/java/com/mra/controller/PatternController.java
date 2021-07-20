@@ -11,6 +11,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.mra.business.PatternBusiness;
 import com.mra.logger.MraLogger;
 import com.mra.model.Patterns;
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class PatternController {
 	
@@ -62,10 +63,10 @@ private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:s
 		Logger.info(this.getClass(),"DELETE PATTERN API CALL STARTED AT "+dateFormat.format(new Date()));
 		return patternBusiness.deletePattern(id);
 	}
-	@GetMapping("/pattern/download/{fileName:.+}")
-	public ResponseEntity<Resource> downloadPattern(@PathVariable String fileName, HttpServletRequest request) throws Exception {
+	@GetMapping("/api/pattern/download/{fileId}")
+	public ResponseEntity<Resource> downloadPattern(@PathVariable int fileId) throws Exception {
 		Logger.info(this.getClass(),"DOWNLOAD PATTERN API CALL STARTED AT "+dateFormat.format(new Date()));
-		return patternBusiness.downloadPattern(fileName,request);   
+		return patternBusiness.downloadPattern(fileId);   
 	}
 	
 	

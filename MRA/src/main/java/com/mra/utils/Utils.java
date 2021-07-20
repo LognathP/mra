@@ -1,5 +1,9 @@
 package com.mra.utils;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -18,4 +22,21 @@ public static List<String> valueToListOfString(String value,String delimiter)
     return result;
 }
 
+public static void closeDB(Connection con,ResultSet rs,PreparedStatement ps) throws SQLException
+{
+	if(con!=null)
+	{
+		con.close();
+	}
+	if(rs!=null)
+	{
+		rs.close();
+	}
+	if(ps!=null)
+	{
+		ps.close();
+	}
+		
+	
+}
 }

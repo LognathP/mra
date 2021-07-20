@@ -3,7 +3,7 @@
 function loadProducts()
 {
 	$('#dataTables-example5').DataTable().clear();
-	var editButtonHtml = "<a class=\"btn btn-primary btn-sm\" id=\"btnEditProd\" href=\"editProduct.html\" ><i class=\"fa fa-edit \"></i> Edit</a>";
+	var editButtonHtml = "<a class=\"btn btn-primary btn-sm\" id=\"btnEditProd\"  ><i class=\"fa fa-edit \"></i> Edit</a>";
 	var deleteButtonHtml = "<a class=\"btn btn-danger btn-sm\" id=\"btnDeleteProd\" ><i class=\"fa fa-trash-o \"></i> Delete</a>";
 	$.ajax({
 		type: "GET",
@@ -67,12 +67,15 @@ function loadProducts()
 
 $(document).on("click", "#btnEditProd", function () {
 	var pid = $(this).closest('tr').attr('id');
-	
+	localStorage.setItem("editProdId", pid);
+	location.href = 'addproduct.html';
+
 });
 
 
 $(document).on("click", "#btnDeleteProd", function () {
 	var pid = $(this).closest('tr').attr('id');
+	//console.log(pid);
 	deleteProductbyId(pid);
 });
 
@@ -133,6 +136,8 @@ function deleteProductbyId(pid) {
 		}
 	});
 }
+
+
 
 
 

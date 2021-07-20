@@ -79,7 +79,20 @@ public class CustomerBusiness {
 	}
 
 	public Object updateCustomer(Customers customer) {
-		return checkCustomerAndAdd(customer);
+		if(customerService.updateCustomer(customer))
+		{
+			LOGGER.info(getClass(), "CUSTOMER UPDATED SUCCESSFULLY");
+			response.setData(customer);
+			response.setStatus(HttpStatus.OK);
+			return new ResponseEntity<Object>(response, HttpStatus.OK);
+		}
+		else
+		{
+			LOGGER.error(getClass(), "UNABLE TO UPDATE CUSTOMER");
+			response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+			response.setData("Unable to Add/Update Customer");
+			return new ResponseEntity<Object>(response, HttpStatus.OK);
+		}
 	}
 
 	public Object deleteCustomer(int id) {
@@ -122,14 +135,14 @@ public class CustomerBusiness {
 			customer.setPassword(DESEncryptor.encrypt(customer.getPassword(), configProp.getConfigValue("password.key")));
 			if(customerService.addCustomer(customer))
 			{
-				LOGGER.info(getClass(), "CUSTOMER ADDED/UPDATED SUCCESSFULLY");
+				LOGGER.info(getClass(), "CUSTOMER ADDED SUCCESSFULLY");
 				response.setData(customer);
 				response.setStatus(HttpStatus.OK);
 				return new ResponseEntity<Object>(response, HttpStatus.OK);
 			}
 			else
 			{
-				LOGGER.error(getClass(), "UNABLE TO ADD/UPDATE CUSTOMER");
+				LOGGER.error(getClass(), "UNABLE TO ADD CUSTOMER");
 				response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
 				response.setData("Unable to Add/Update Customer");
 				return new ResponseEntity<Object>(response, HttpStatus.OK);

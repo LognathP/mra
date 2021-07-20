@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,7 +21,7 @@ import com.mra.business.ProductBusiness;
 import com.mra.logger.MraLogger;
 import com.mra.model.Product;
 import com.mra.model.ProductRequest;
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class ProductController {
 	
@@ -53,10 +54,10 @@ private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:s
 		Logger.info(this.getClass(),"DELETE PRODUCT API CALL STARTED AT "+dateFormat.format(new Date()));
 		return productBusiness.deleteProduct(id);
 	}
-	@GetMapping("/product/download/{fileName:.+}")
-	public ResponseEntity<Resource> downloadProduct(@PathVariable String fileName, HttpServletRequest request) throws Exception {
+	@GetMapping("/api/product/download/{fileId}")
+	public ResponseEntity<Resource> downloadProduct(@PathVariable int fileId) throws Exception {
 		Logger.info(this.getClass(),"DOWNLOAD PRODUCT API CALL STARTED AT "+dateFormat.format(new Date()));
-		return productBusiness.downloadProduct(fileName,request);   
+		return productBusiness.downloadProduct(fileId);   
 	}
 	
 	

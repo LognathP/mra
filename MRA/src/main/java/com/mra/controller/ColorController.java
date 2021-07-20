@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +17,7 @@ import com.mra.business.ColorBusiness;
 import com.mra.business.ColorBusiness;
 import com.mra.logger.MraLogger;
 import com.mra.model.Color;
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class ColorController {
 	

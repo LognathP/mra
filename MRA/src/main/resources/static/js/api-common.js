@@ -33,6 +33,7 @@ var addproductApi = "/api/product/add";
 var editproductApi = "/api/product/edit";
 var deleteproductApi = "/api/product/delete";
 var listproductApi = "/api/product/getall";
+var getProductByIdApi = "/api/product/get";
 
 
 //Orders API
@@ -42,6 +43,10 @@ var updateOrderApi = "/api/order/update";
 var getOrderDetailApi = "/api/order/detail";
 var getOrderInvoiceApi = "/api/order/invoice";
 
-
+//Category API
+var addSubCategory = "/api/subcategory/add";
+var editSubCategory = "/api/subcategory/edit";
+var deleteSubCategory = "/api/subcategory/delete";
+var getAllSubCategories = "/api/subcategory/getall";
 
 

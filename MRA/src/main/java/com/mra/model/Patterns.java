@@ -1,6 +1,7 @@
 package com.mra.model;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.Getter;
@@ -31,5 +33,18 @@ public class Patterns {
 	private LocalDateTime created;
 	@UpdateTimestamp
 	private LocalDateTime updated;
+	@Lob
+	@Type(type="org.hibernate.type.BinaryType")
+	private byte[] data;
+	private String file_type;
+	
+	@Override
+	public String toString() {
+		return "Patterns [id=" + id + ", pattern_name=" + pattern_name + ", pattern_file=" + pattern_file
+				+ ", file_size=" + file_size + ", created=" + created + ", updated=" + updated + ", data="
+				+ Arrays.toString(data) + ", file_type=" + file_type + "]";
+	}
+	
+	
 
 }
